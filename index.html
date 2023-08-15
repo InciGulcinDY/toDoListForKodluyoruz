@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+      integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+      crossorigin="anonymous"
+    />
+    <title>To Do list</title>
+  </head>
+  <body>
+    <!--Toast - Starts-->
+    <div class="mr-1" style="position: relative">
+      <div style="position: absolute; top: 0; right: 0">
+        <div
+          id="successToast"
+          class="toast success hide"
+          role="alert"
+          aria-live="assertive"
+          aria-atomic="true"
+          data-delay="4000"
+         >
+          <div>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="toast"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="toast-body">New Task has been added.</div>
+        </div>
+      </div>
+    </div>
+    <div class="mr-1" style="position: relative">
+      <div style="position: absolute; top: 0; right: 0">
+        <div
+          id="errorToast"
+          class="toast error hide liveToast" 
+          role="alert"
+          aria-live="assertive"
+          aria-atomic="true"
+          data-delay="4000"
+        >
+          <div>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="toast"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="toast-body">You are not allowed to upload the empty task to the list!</div>
+        </div>
+      </div>
+    </div>
+    <!--Toast - Ends-->
+
+    <div class="container">
+      <!--Header - Starts-->
+      <div class="header py-2">
+        <img
+          src="https://cdn.sanity.io/images/9kdepi1d/production/65c832d202a503b15d99e628f4313782f3ef50db-300x62.png"
+          class="mb-1 bg-white mx-auto d-block"
+          alt="Kodluyoruz Logo"
+        />
+        <h2 class="text-center text-white">To Do List</h2>
+        <!--Form for "What are you going to do today?"-->
+        <div class="container">
+          <div class="row col-12 mx-auto">
+            <input class="col-10" type="text" id="task" placeholder="What are you going to do today?" />
+            <span onclick="newTask()" id="liveToastBtn" class="button btn btn-light col-2"
+              >Add</span>
+          </div>
+        </div>
+      </div>
+      <!--Header - Ends-->
+
+      <!--List - Starts-->
+      <div class="list list-group" id="taskList">
+        <!--Button for To Do List-->
+        <button type="button" class="task list-group-item list-group-item-action d-flex justify-content-between align-items-center" onclick="completeTask(this)">
+          Drink 3lt water
+          <!--Inline button for Closing-->
+          <span type="button" class="btn btn-light btn-close" aria-label="Close" onclick="deleteTask(this)">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+              <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+            </svg>
+          </span>
+        </button>
+        <button type="button" class="task list-group-item list-group-item-action d-flex justify-content-between align-items-center" onclick="completeTask(this)">
+          Do your homework 
+          <!--Inline button for Closing-->
+          <span type="button" class="btn btn-light btn-close" aria-label="Close" onclick="deleteTask(this)" >
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+              <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+            </svg>
+          </span>
+        </button>
+        <button type="button" class="task list-group-item list-group-item-action d-flex justify-content-between align-items-center" onclick="completeTask(this)">
+          Read 50 pages 
+          <!--Inline button for Closing-->
+          <span type="button" class="btn btn-light btn-close" aria-label="Close" onclick="deleteTask(this)" >
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+              <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+            </svg>
+          </span>
+        </button>
+      </div>
+      <!--List - Ends-->
+      <script
+        src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"
+      ></script>
+      <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
+        crossorigin="anonymous"
+      ></script>
+      <script
+      src="toDoList.js"></script>
+    </div>
+  </body>
+</html>
